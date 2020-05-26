@@ -5,8 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "deploy": "sls deploy",
-    "deploy:prod": "sls deploy --stage prod"
+    "deploy": "npm test && sls deploy",
+    "deploy:prod": "npm test && sls deploy --stage prod"
   },
   "dependencies": {
     "http-status-codes": "^1.4.0",
