@@ -1,14 +1,24 @@
-import { APIGatewayEvent } from "aws-lambda";
+import { ExtendedAPIGatewayEvent, ServiceResult } from "./types";
+import { checkIfError } from './utils';
 
-interface ExtendedAPIGatewayEvent extends APIGatewayEvent {
-  pathParameters: {
-    name?: string;
+export const helloService = (event: ExtendedAPIGatewayEvent): ServiceResult => {
+  const errorCode = checkIfError({ requiredParams: [event.pathParameters.name] });
+
+  return {
+    errorCode,
+    result: !errorCode
+      ? `Hello ${event.pathParameters.name}`
+      : null
   };
-}
+};
 
-export default {
-  hello: ({ pathParameters }: ExtendedAPIGatewayEvent) =>
-    `Hello ${pathParameters.name}`,
-  goodbye: ({ pathParameters }: ExtendedAPIGatewayEvent) =>
-    `Goodbye ${pathParameters.name}`,
+export const goodbyeService = (event: ExtendedAPIGatewayEvent): ServiceResult => {
+  const errorCode = checkIfError({ requiredParams: [event.pathParameters.name] });
+
+  return {
+    errorCode,
+    result: !errorCode
+      ? `Goodbye ${event.pathParameters.name}`
+      : null
+  };
 };

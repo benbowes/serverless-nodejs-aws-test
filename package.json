@@ -9,6 +9,7 @@
     "deploy:prod": "sls deploy --stage prod"
   },
   "dependencies": {
+    "http-status-codes": "^1.4.0",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {
